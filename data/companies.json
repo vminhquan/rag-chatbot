@@ -1,0 +1,52 @@
+{
+  "companies": [
+    {
+      "id": "novatech",
+      "name": "NovaTech Labs",
+      "industry": "Công nghệ thông tin",
+      "location": "TP. Hồ Chí Minh",
+      "overview": "NovaTech Labs là công ty phần mềm hư cấu phát triển nền tảng thương mại điện tử. Môi trường làm việc hybrid, đề cao tính chủ động và học hỏi.",
+      "benefits": "Lương tháng 13, bảo hiểm sức khỏe, 14 ngày phép, ngân sách học tập 10 triệu đồng mỗi năm và làm việc hybrid 2 ngày mỗi tuần.",
+      "jobs": [
+        {"id": "backend-developer", "title": "Backend Developer", "category": "Software Engineering", "level": "Middle", "location": "TP. Hồ Chí Minh", "employment_type": "Full-time", "status": "open", "description": "Phát triển REST API bằng Python và FastAPI, thiết kế PostgreSQL, viết unit test và review code.", "requirements": "Tối thiểu 2 năm kinh nghiệm Python; biết FastAPI hoặc Django, PostgreSQL, Docker và Git.", "salary": "25–40 triệu đồng/tháng."},
+        {"id": "frontend-developer", "title": "Frontend Developer", "category": "Software Engineering", "level": "Middle", "location": "TP. Hồ Chí Minh", "employment_type": "Full-time", "status": "open", "description": "Phát triển giao diện React và TypeScript, phối hợp UI/UX và tối ưu hiệu năng.", "requirements": "Tối thiểu 2 năm kinh nghiệm frontend; thành thạo React, TypeScript, HTML và CSS.", "salary": "22–35 triệu đồng/tháng."}
+      ]
+    },
+    {
+      "id": "antam-health",
+      "name": "An Tâm Health",
+      "industry": "Y tế",
+      "location": "Hà Nội",
+      "overview": "An Tâm Health là doanh nghiệp hư cấu cung cấp dịch vụ chăm sóc sức khỏe và vận hành chuỗi phòng khám.",
+      "benefits": "Bảo hiểm sức khỏe mở rộng, phụ cấp ăn trưa, 15 ngày phép, khám sức khỏe định kỳ và hỗ trợ đào tạo chuyên môn.",
+      "jobs": [
+        {"id": "customer-care", "title": "Chuyên viên Chăm sóc khách hàng", "category": "Dịch vụ khách hàng", "level": "Junior", "location": "Hà Nội", "employment_type": "Full-time", "status": "open", "description": "Tiếp nhận lịch hẹn, hướng dẫn khách hàng và phối hợp với bộ phận chuyên môn.", "requirements": "Giao tiếp tốt, sử dụng tin học văn phòng và có tinh thần phục vụ; kinh nghiệm y tế là lợi thế.", "salary": "10–15 triệu đồng/tháng."},
+        {"id": "hr-specialist", "title": "Chuyên viên Nhân sự", "category": "Nhân sự", "level": "Middle", "location": "Hà Nội", "employment_type": "Full-time", "status": "open", "description": "Phụ trách tuyển dụng, hồ sơ nhân sự và hoạt động gắn kết nhân viên.", "requirements": "Tối thiểu 2 năm kinh nghiệm nhân sự, hiểu luật lao động và có kỹ năng tổ chức.", "salary": "15–22 triệu đồng/tháng."}
+      ]
+    },
+    {
+      "id": "greenroute",
+      "name": "GreenRoute Logistics",
+      "industry": "Logistics",
+      "location": "Đà Nẵng",
+      "overview": "GreenRoute Logistics là doanh nghiệp logistics hư cấu chuyên vận tải và tối ưu chuỗi cung ứng nội địa.",
+      "benefits": "Lương tháng 13, phụ cấp điện thoại và đi lại, bảo hiểm tai nạn, 12 ngày phép và thưởng theo hiệu suất.",
+      "jobs": [
+        {"id": "supply-chain-analyst", "title": "Supply Chain Analyst", "category": "Chuỗi cung ứng", "level": "Middle", "location": "Đà Nẵng", "employment_type": "Full-time", "status": "open", "description": "Phân tích dữ liệu vận hành, dự báo nhu cầu và đề xuất tối ưu chi phí logistics.", "requirements": "Có kinh nghiệm phân tích dữ liệu, Excel hoặc Power BI; hiểu quy trình chuỗi cung ứng.", "salary": "18–28 triệu đồng/tháng."},
+        {"id": "warehouse-supervisor", "title": "Giám sát Kho vận", "category": "Vận hành", "level": "Senior", "location": "Đà Nẵng", "employment_type": "Full-time", "status": "closed", "description": "Điều phối nhập xuất hàng và quản lý đội ngũ kho.", "requirements": "Tối thiểu 3 năm kinh nghiệm kho vận và có kỹ năng quản lý nhóm.", "salary": "Thông tin mức lương chưa được công bố."}
+      ]
+    },
+    {
+      "id": "mocviet-retail",
+      "name": "Mộc Việt Retail",
+      "industry": "Bán lẻ",
+      "location": "Cần Thơ",
+      "overview": "Mộc Việt Retail là thương hiệu bán lẻ hư cấu về sản phẩm gia dụng và phong cách sống Việt.",
+      "benefits": "Thưởng doanh số, giảm giá nhân viên, phụ cấp ca làm, đào tạo bán hàng và cơ hội thăng tiến nội bộ.",
+      "jobs": [
+        {"id": "store-manager", "title": "Quản lý Cửa hàng", "category": "Bán hàng", "level": "Middle", "location": "Cần Thơ", "employment_type": "Full-time", "status": "open", "description": "Quản lý hoạt động cửa hàng, doanh số, hàng tồn kho và đội ngũ bán hàng.", "requirements": "Tối thiểu 2 năm kinh nghiệm bán lẻ, có kỹ năng quản lý và xử lý tình huống.", "salary": "16–24 triệu đồng/tháng."},
+        {"id": "digital-marketing", "title": "Digital Marketing Executive", "category": "Marketing", "level": "Junior", "location": "Cần Thơ", "employment_type": "Full-time", "status": "open", "description": "Triển khai nội dung mạng xã hội, quảng cáo số và theo dõi hiệu quả chiến dịch.", "requirements": "Có kiến thức digital marketing, viết nội dung tốt và biết sử dụng công cụ phân tích.", "salary": "12–18 triệu đồng/tháng."}
+      ]
+    }
+  ]
+}
