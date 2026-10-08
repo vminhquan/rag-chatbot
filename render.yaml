@@ -1,0 +1,52 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Các biến có "sync: false" sẽ được Render hỏi giá trị khi tạo Blueprint.
+
+services:
+  # ===== Backend FastAPI =====
+  - type: web
+    name: rag-backend
+    runtime: python
+    plan: free
+    region: singapore
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/catalog
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: recruitment-chatbot
+      - key: PINECONE_NAMESPACE
+        value: company-demo
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_TIMEOUT
+        value: "60"
+      - key: RAG_TOP_K
+        value: "5"
+      # URL của frontend, ví dụ: https://rag-frontend.onrender.com
+      - key: FRONTEND_ORIGIN
+        sync: false
+
+  # ===== Frontend React/Vite (static site) =====
+  - type: web
+    name: rag-frontend
+    runtime: static
+    rootDir: front-end
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    envVars:
+      # URL của backend, ví dụ: https://rag-backend.onrender.com
+      - key: VITE_API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

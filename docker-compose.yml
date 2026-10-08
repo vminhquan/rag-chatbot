@@ -13,14 +13,6 @@ services:
     env_file:
       - .env
 
-    # Trong container, 127.0.0.1 là chính backend. Dùng tên service Docker
-    # "llama" để gọi sang llama-server qua mạng nội bộ Compose.
-    environment:
-      LLAMA_BASE_URL: http://llama:8080/v1
-
-    depends_on:
-      - llama
-
 
   frontend:
     build:
@@ -34,17 +26,3 @@ services:
 
     depends_on:
       - backend
-
-  llama:
-    build:
-      context: ./llama
-      dockerfile: Dockerfile
-
-    container_name: llama-server
-
-    # Chỉ backend cần gọi LLM; không publish cổng này ra máy host.
-    expose:
-      - "8080"
-
-    volumes:
-      - /Users/vominhquan/llama.cpp/models:/models:ro

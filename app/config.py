@@ -23,9 +23,10 @@ class Settings:
     pinecone_api_key: str
     pinecone_index_name: str
     pinecone_namespace: str
-    llama_base_url: str
-    llama_model: str
-    llama_timeout: float
+    openai_api_key: str
+    openai_base_url: str | None
+    openai_model: str
+    openai_timeout: float
     frontend_origin: str
     top_k: int
 
@@ -55,13 +56,11 @@ def get_settings() -> Settings:
         pinecone_namespace=os.getenv(
             "PINECONE_NAMESPACE", "company-demo"
         ),
-        # llama-server cung cấp REST API tương thích OpenAI tại /v1.
-        llama_base_url=os.getenv(
-            "LLAMA_BASE_URL", "http://127.0.0.1:8080/v1"
-        ).rstrip("/"),
-        # Alias này phải trùng với tham số --alias khi chạy llama-server.
-        llama_model=os.getenv("LLAMA_MODEL", "qwen2.5-1.5b-instruct"),
-        llama_timeout=float(os.getenv("LLAMA_TIMEOUT", "120")),
+        openai_api_key=_required_env("OPENAI_API_KEY"),
+        # Để trống để dùng endpoint mặc định của OpenAI.
+        openai_base_url=os.getenv("OPENAI_BASE_URL", "").strip() or None,
+        openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+        openai_timeout=float(os.getenv("OPENAI_TIMEOUT", "60")),
         frontend_origin=os.getenv(
             "FRONTEND_ORIGIN", "http://localhost:5173"
         ),

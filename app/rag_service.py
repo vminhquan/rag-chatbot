@@ -1,11 +1,25 @@
-"""Điều phối quy trình RAG với LLM chạy local bằng llama.cpp."""
+"""Điều phối quy trình RAG với LLM gọi qua OpenAI API."""
 
-import httpx
+from functools import lru_cache
+
+from openai import OpenAI
 
 from app.catalog_service import company_id_from_namespace, get_company
 from app.config import get_settings
 from app.pinecone_service import search_documents
 from app.schema import ChatFilters, ChatMessage, ChatResponse, SourceDocument
+
+
+@lru_cache(maxsize=1)
+def get_openai_client() -> OpenAI:
+    """Tạo một OpenAI client dùng chung, đọc API key từ cấu hình."""
+
+    settings = get_settings()
+    return OpenAI(
+        api_key=settings.openai_api_key,
+        base_url=settings.openai_base_url,
+        timeout=settings.openai_timeout,
+    )
 
 
 SYSTEM_INSTRUCTIONS = """
@@ -109,7 +123,7 @@ def answer_question(
     """Thực hiện đầy đủ một lượt hỏi đáp RAG.
 
     Luồng xử lý: tìm tài liệu trong Pinecone -> ghép context và lịch sử -> gọi
-    llama.cpp -> trả câu trả lời kèm nguồn cho frontend.
+    OpenAI -> trả câu trả lời kèm nguồn cho frontend.
     """
 
     settings = get_settings()
@@ -143,24 +157,15 @@ CÂU HỎI CỦA ỨNG VIÊN:
 {question}
 """.strip()
 
-    # llama-server hỗ trợ chuẩn OpenAI Chat Completions. API chạy hoàn toàn
-    # trên máy local nên không cần OPENAI_API_KEY và không tiêu tốn quota token.
-    response = httpx.post(
-        f"{settings.llama_base_url}/chat/completions",
-        json={
-            "model": settings.llama_model,
-            "messages": [
-                {"role": "system", "content": SYSTEM_INSTRUCTIONS},
-                {"role": "user", "content": user_input},
-            ],
-            "temperature": 0.2,
-            "max_tokens": 600,
-            "stream": False,
-        },
-        timeout=settings.llama_timeout,
+    response = get_openai_client().chat.completions.create(
+        model=settings.openai_model,
+        messages=[
+            {"role": "system", "content": SYSTEM_INSTRUCTIONS},
+            {"role": "user", "content": user_input},
+        ],
+        temperature=0.2,
+        max_tokens=600,
     )
-    response.raise_for_status()
-    payload = response.json()
-    answer = payload["choices"][0]["message"]["content"].strip()
+    answer = (response.choices[0].message.content or "").strip()
 
     return ChatResponse(answer=answer, sources=documents)
