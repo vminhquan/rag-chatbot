@@ -27,7 +27,7 @@ class Settings:
     openai_base_url: str | None
     openai_model: str
     openai_timeout: float
-    frontend_origin: str
+    frontend_origins: list[str]
     top_k: int
 
 
@@ -61,8 +61,14 @@ def get_settings() -> Settings:
         openai_base_url=os.getenv("OPENAI_BASE_URL", "").strip() or None,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
         openai_timeout=float(os.getenv("OPENAI_TIMEOUT", "60")),
-        frontend_origin=os.getenv(
-            "FRONTEND_ORIGIN", "http://localhost:5173"
-        ),
+        # Có thể khai báo nhiều origin, phân tách bằng dấu phẩy. Dấu "/" ở cuối
+        # bị bỏ đi vì trình duyệt gửi header Origin không có "/".
+        frontend_origins=[
+            origin.strip().rstrip("/")
+            for origin in os.getenv(
+                "FRONTEND_ORIGIN", "http://localhost:5173"
+            ).split(",")
+            if origin.strip()
+        ],
         top_k=int(os.getenv("RAG_TOP_K", "5")),
     )

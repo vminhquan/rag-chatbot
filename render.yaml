@@ -30,7 +30,7 @@ services:
         value: "60"
       - key: RAG_TOP_K
         value: "5"
-      # URL của frontend, ví dụ: https://rag-frontend.onrender.com
+      # URL của frontend, không có "/" cuối. Nhiều origin: phân tách bằng dấu phẩy.
       - key: FRONTEND_ORIGIN
         sync: false
 
